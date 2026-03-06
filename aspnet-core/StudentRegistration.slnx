@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/StudentRegistration.Application.Contracts/StudentRegistration.Application.Contracts.csproj" />
+    <Project Path="src/StudentRegistration.Application/StudentRegistration.Application.csproj" />
+    <Project Path="src/StudentRegistration.DbMigrator/StudentRegistration.DbMigrator.csproj" />
+    <Project Path="src/StudentRegistration.Domain.Shared/StudentRegistration.Domain.Shared.csproj" />
+    <Project Path="src/StudentRegistration.Domain/StudentRegistration.Domain.csproj" />
+    <Project Path="src/StudentRegistration.EntityFrameworkCore/StudentRegistration.EntityFrameworkCore.csproj" />
+    <Project Path="src/StudentRegistration.HttpApi.Client/StudentRegistration.HttpApi.Client.csproj" />
+    <Project Path="src/StudentRegistration.HttpApi.Host/StudentRegistration.HttpApi.Host.csproj" />
+    <Project Path="src/StudentRegistration.HttpApi/StudentRegistration.HttpApi.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/StudentRegistration.Application.Tests/StudentRegistration.Application.Tests.csproj" />
+    <Project Path="test/StudentRegistration.Domain.Tests/StudentRegistration.Domain.Tests.csproj" />
+    <Project Path="test/StudentRegistration.EntityFrameworkCore.Tests/StudentRegistration.EntityFrameworkCore.Tests.csproj" />
+    <Project Path="test/StudentRegistration.HttpApi.Client.ConsoleTestApp/StudentRegistration.HttpApi.Client.ConsoleTestApp.csproj" />
+    <Project Path="test/StudentRegistration.TestBase/StudentRegistration.TestBase.csproj" />
+  </Folder>
+</Solution>

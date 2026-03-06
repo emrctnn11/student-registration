@@ -1,0 +1,9 @@
+﻿using StudentRegistration.EntityFrameworkCore;
+using Xunit;
+
+namespace StudentRegistration.EntityFrameworkCore;
+
+public class StudentRegistrationEntityFrameworkCoreCollectionFixtureBase : ICollectionFixture<StudentRegistrationEntityFrameworkCoreFixture>
+{
+
+}

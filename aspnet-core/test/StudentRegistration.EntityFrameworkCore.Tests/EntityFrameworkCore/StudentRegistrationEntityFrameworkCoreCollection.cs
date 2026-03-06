@@ -1,0 +1,9 @@
+﻿using Xunit;
+
+namespace StudentRegistration.EntityFrameworkCore;
+
+[CollectionDefinition(StudentRegistrationTestConsts.CollectionDefinitionName)]
+public class StudentRegistrationEntityFrameworkCoreCollection : ICollectionFixture<StudentRegistrationEntityFrameworkCoreFixture>
+{
+
+}
