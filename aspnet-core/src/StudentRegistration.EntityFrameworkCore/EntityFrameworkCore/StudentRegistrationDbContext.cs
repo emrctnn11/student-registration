@@ -1,9 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StudentRegistration.Departments;
+using StudentRegistration.Students;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
@@ -50,6 +53,8 @@ public class StudentRegistrationDbContext :
     // Tenant Management
     public DbSet<Tenant> Tenants { get; set; }
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
+    public DbSet<Department> Departments { get; set; }
+    public DbSet<Student> Students { get; set; }
 
     #endregion
 
@@ -82,5 +87,25 @@ public class StudentRegistrationDbContext :
         //    b.ConfigureByConvention(); //auto configure for the base class props
         //    //...
         //});
+
+        builder.Entity<Department>(b =>
+        {
+            b.ToTable("AppDepartments");
+            b.ConfigureByConvention();
+            b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Quota).IsRequired();
+        });
+
+        builder.Entity<Student>(b =>
+        {
+            b.ToTable("AppStudents");
+            b.ConfigureByConvention();
+            b.Property(x => x.FirstName).IsRequired().HasMaxLength(64);
+            b.Property(x => x.LastName).IsRequired().HasMaxLength(64);
+            b.Property(x => x.NationalId).IsRequired().HasMaxLength(11);
+            b.Property(x => x.Province).IsRequired().HasMaxLength(64);
+            b.Property(x => x.District).IsRequired().HasMaxLength(64);
+            b.HasOne(x => x.Department).WithMany().HasForeignKey(x => x.DepartmentId);
+        });
     }
 }
