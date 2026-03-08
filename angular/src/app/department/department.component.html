@@ -1,0 +1,33 @@
+<div class="container mt-4">
+  <h2>Departments</h2>
+  <dx-data-grid
+    [dataSource]="departments"
+    [showBorders]="true"
+    [columnAutoWidth]="true"
+    [rowAlternationEnabled]="true"
+    [repaintChangesOnly]="true"
+    (onRowInserting)="onRowInserting($event)"
+    (onRowUpdating)="onRowUpdating($event)"
+    (onRowRemoving)="onRowRemoving($event)"
+  >
+    <dxo-editing mode="popup" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
+      <dxo-popup title="Add" [showTitle]="true" [width]="600" [height]="250"> </dxo-popup>
+      <dxo-form>
+        <dxi-item dataField="name"></dxi-item>
+        <dxi-item dataField="quota"></dxi-item>
+      </dxo-form>
+    </dxo-editing>
+
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true"></dxo-pager>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+
+    <dxi-column dataField="name" caption="Department Name" [allowFiltering]="true"></dxi-column>
+    <dxi-column
+      dataField="quota"
+      caption="Quota"
+      dataType="number"
+      [allowFiltering]="false"
+    ></dxi-column>
+  </dx-data-grid>
+</div>

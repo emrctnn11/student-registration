@@ -15,7 +15,7 @@ public class CreateUpdateStudentDto
 
     [Required]
     [StringLength(11, MinimumLength = 11)]
-    public int NationalId { get; set; }
+    public string NationalId { get; set; }
 
     [Required]
     [StringLength(64)]

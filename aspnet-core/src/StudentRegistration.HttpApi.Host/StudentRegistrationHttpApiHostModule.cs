@@ -162,7 +162,7 @@ public class StudentRegistrationHttpApiHostModule : AbpModule
     {
         context.Services.AddCors(options =>
         {
-            options.AddDefaultPolicy(builder =>
+            options.AddPolicy("AllowAll", builder =>
             {
                 builder
                     .WithOrigins(configuration["App:CorsOrigins"]?
@@ -198,7 +198,7 @@ public class StudentRegistrationHttpApiHostModule : AbpModule
         app.UseCorrelationId();
         app.MapAbpStaticAssets();
         app.UseRouting();
-        app.UseCors();
+        app.UseCors("AllowAll");
         app.UseAuthentication();
         app.UseAbpOpenIddictValidation();
 

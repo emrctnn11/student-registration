@@ -4,7 +4,16 @@ export const appRoutes: Routes = [
   {
     path: '',
     pathMatch: 'full',
+    loadChildren: () => import('./department/department.routes').then(m => m.departmentRoutes),
+  },
+  {
+    path: 'home',
+    pathMatch: 'full',
     loadChildren: () => import('./home/home.routes').then(m => m.homeRoutes),
+  },
+  {
+    path: 'students',
+    loadChildren: () => import('./student/student.routes').then(m => m.studentRoutes),
   },
   {
     path: 'account',
@@ -16,12 +25,10 @@ export const appRoutes: Routes = [
   },
   {
     path: 'tenant-management',
-    loadChildren: () =>
-      import('@abp/ng.tenant-management').then(m => m.createRoutes()),
+    loadChildren: () => import('@abp/ng.tenant-management').then(m => m.createRoutes()),
   },
   {
     path: 'setting-management',
-    loadChildren: () =>
-      import('@abp/ng.setting-management').then(m => m.createRoutes()),
+    loadChildren: () => import('@abp/ng.setting-management').then(m => m.createRoutes()),
   },
 ];

@@ -1,0 +1,63 @@
+<div class="container mt-4">
+  <h2>Students</h2>
+  <dx-data-grid
+    [dataSource]="students"
+    [showBorders]="true"
+    [columnAutoWidth]="true"
+    [rowAlternationEnabled]="true"
+    (onRowInserting)="onRowInserting($event)"
+    (onRowUpdating)="onRowUpdating($event)"
+    (onRowRemoving)="onRowRemoving($event)"
+    (onEditorPreparing)="onEditorPreparing($event)"
+    (onEditingStart)="onEditingStart($event)">
+
+    <dxo-editing
+      mode="row"
+      [allowAdding]="true"
+      [allowUpdating]="true"
+      [allowDeleting]="true">
+    </dxo-editing>
+
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true"></dxo-pager>
+    <dxo-filter-row [visible]="false"></dxo-filter-row>
+
+    <dxi-column dataField="firstName" caption="First Name"></dxi-column>
+    <dxi-column dataField="lastName" caption="Last Name"></dxi-column>
+    <dxi-column dataField="nationalId" caption="National ID"></dxi-column>
+
+    <dxi-column dataField="province" caption="Province" editCellTemplate="provinceCellTemplate"></dxi-column>
+    <dxi-column dataField="district" caption="District" editCellTemplate="districtCellTemplate"></dxi-column>
+
+    <dxi-column dataField="departmentId" caption="Department">
+      <dxo-lookup
+        [dataSource]="departments"
+        valueExpr="id"
+        displayExpr="name">
+      </dxo-lookup>
+    </dxi-column>
+
+    <div *dxTemplate="let cellInfo of 'provinceCellTemplate'">
+      <dx-select-box
+        [dataSource]="provinces"
+        [value]="cellInfo.value"
+        [searchEnabled]="true"
+        searchMode="contains"
+        [showClearButton]="true"
+        (onValueChanged)="onProvinceChanged($event, cellInfo)">
+      </dx-select-box>
+    </div>
+
+    <div *dxTemplate="let cellInfo of 'districtCellTemplate'">
+      <dx-select-box
+        [dataSource]="currentDistricts"
+        [value]="cellInfo.value"
+        [searchEnabled]="true"
+        searchMode="contains"
+        [showClearButton]="true"
+        (onValueChanged)="cellInfo.setValue($event.value)">
+      </dx-select-box>
+    </div>
+
+  </dx-data-grid>
+</div>
