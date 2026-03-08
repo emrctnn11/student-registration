@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { DxDataGridModule, DxSelectBoxModule } from 'devextreme-angular';
 import { RestService } from '@abp/ng.core';
 import { TurkeyGeoService } from '../shared/geo/turkey-geo.service';
-import * as signalR from '@microsoft/signalr';
 import { HttpClient } from '@angular/common/http';
+import * as signalR from '@microsoft/signalr';
 
 @Component({
   selector: 'app-student',
@@ -29,6 +29,7 @@ export class StudentComponent implements OnInit, OnDestroy {
     this.loadStudents();
     this.loadDepartments();
     this.loadProvinces();
+    this.startSignalRConnection();
   }
 
   ngOnDestroy(): void {
@@ -120,14 +121,21 @@ export class StudentComponent implements OnInit, OnDestroy {
 
   startSignalRConnection(): void {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:44323/signalr-hubs/student')
+      .withUrl('https://localhost:44323/signalr-hubs/student', {
+        skipNegotiation: false,
+        transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling,
+      })
       .withAutomaticReconnect()
       .build();
 
-    this.hubConnection.on('StudentChanged', () => {
+    this.hubConnection.on('StudentChanged', (data) => {
+      console.log("student added: ", data);
       this.loadStudents();
     });
 
-    this.hubConnection.start().catch(err => console.error('SignalR error:', err));
+    this.hubConnection
+      .start()
+      .then(() => console.log('SignalR connected!'))
+      .catch(err => console.error('SignalR error:', err));
   }
 }

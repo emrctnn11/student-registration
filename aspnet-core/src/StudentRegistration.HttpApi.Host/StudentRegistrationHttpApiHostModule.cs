@@ -222,9 +222,6 @@ public class StudentRegistrationHttpApiHostModule : AbpModule
 
         app.UseAuditing();
         app.UseAbpSerilogEnrichers();
-        app.UseConfiguredEndpoints(endpoints =>
-        {
-            endpoints.MapHub<StudentHub>("/signalr-hubs/student");
-        });
+        app.UseConfiguredEndpoints();
     }
 }
